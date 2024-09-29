@@ -65,7 +65,6 @@ public:
 int main() {
     
     Solution s;
-    // cout<<INT_MAX<<endl;
     cout<<s.reverse(-1463847412);
 
     return 0;
