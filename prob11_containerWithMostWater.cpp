@@ -44,6 +44,7 @@ class Solution{
         right = height.size()-1;
 
         while(left != right){
+            
             cout<<"left : "<<height[left]<<" right : "<<height[right]<<endl;
             area = (right-left)* min(height[left],height[right]);
             maximumArea = max(area,maximumArea);
