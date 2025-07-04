@@ -38,7 +38,7 @@ using namespace std;
 class Solution{
     
 
-    vector<string> digitToLetters={
+    vector<string> phonMap={
         "", "","abc", "def", "ghi","jkl","mno","pqrs","tuv","wxyz"
     };
 
@@ -50,35 +50,31 @@ public:
         cout<<"Started functon : "<<endl;
 
         // for storing the result 
-        vector<string> result; 
+        vector<string> result ={""}; 
         
-        //for getting the Strings from the number using ascii values 
-        vector<string> numbersLetters;
 
         // returning function if digits are empty 
         if(digits.empty()){
-            return result;
+            return {};
         }
 
+        int i=0;
 
-        // getting strings related the number   
-        for(int i=0;i<digits.length();i++)
-        {
-            numbersLetters.push_back(digitToLetters[digits[i]-'0']);
-        }
-
-
-        // iterating for founding maximum possibilities 
-        for(int i=0;i<numbersLetters.size();i++)
-        {
-
-            for(int j=0;j<numbersLetters[i];j++)
-            {
-                for(int k=0;k<numbersLetters[j].size();k++){
-                    cout<<numbersLetters[i][k]<<numbersLetters[j+1][k]<<endl;
+        while(i < digits.size()){
+            vector<string> temp;
+            string letters = phonMap[digits[i]-'0']; 
+            for(const string& comb:result){
+                for(char ch:letters){
+                    temp.push_back(comb+ch);
                 }
+
             }
+            result = temp;
+            cout<<i<<endl;
+            i++;
+
         }
+        
 
         return result;
     }
@@ -86,7 +82,13 @@ public:
 
 int main() {
     Solution s;
-    s.letterCombinations("23");
+    vector<string> result;
+
+    result = s.letterCombinations("2345");
+
+    for(const string& comb : result){
+        cout<<comb<<" ";
+    }
     
     return 0;
 }

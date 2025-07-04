@@ -34,7 +34,7 @@ using namespace std;
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-
+        
         if(strs.size() >= 200){
             cout<<"Array size exceeded";
             return "";
