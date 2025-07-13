@@ -80,7 +80,8 @@ public:
 
 int main()
 {
-    ListNode* four = new ListNode(4);
+    ListNode* five = new ListNode(5);
+    ListNode* four = new ListNode(4,five);
     ListNode* third = new ListNode(3,four);
     ListNode* second = new ListNode(2,third);
     ListNode* first = new ListNode(1,second);
