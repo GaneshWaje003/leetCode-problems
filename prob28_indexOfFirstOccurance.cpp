@@ -22,8 +22,14 @@ public:
 
 int main() {
   
-    Solution s;
-    cout<<s.strStr("sadbutsad" , "sad");
+    // Solution s;
+    // cout<<s.strStr("sadbutsad" , "sad");
+
+    int b = -2147483648;
+    int c = -1;
+
+    long long a =  static_cast<long long>(b)/c;
+    cout<<a;
 
 
     return 0;
