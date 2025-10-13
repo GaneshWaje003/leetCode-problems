@@ -27,6 +27,12 @@ class Solution {
 
         List<int[]> result = new ArrayList<>();
         int size = intervals.length;
+
+            if(size == 0 ){
+            result.add(newInterval);
+            return result.toArray(new int[result.size()][]);
+        }
+
         int[] current = intervals[0];
 
         for(int[] row:intervals){
