@@ -1,1 +1,1 @@
-                    continue;
+s.length() == 1 && c == '.'
