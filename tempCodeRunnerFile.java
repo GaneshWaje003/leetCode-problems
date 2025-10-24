@@ -1,1 +1,2 @@
-s.length() == 1 && c == '.'
+ for (int i : result)
+            System.out.print(i + " ");
