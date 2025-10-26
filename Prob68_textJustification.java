@@ -8,67 +8,46 @@ public class Prob68_textJustification {
         solution.fullJustify(words, 16);
     }
 }
-
 class Solution {
     public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> ans = new ArrayList<>();
+        int i = 0;
+        
+        while (i < words.length) {
+            int j = i + 1;
+            int lineLength = words[i].length();
 
-        List<String> result = new ArrayList<>();
-        StringBuilder temp = new StringBuilder("");
-
-        temp.append(words[0] + " ");
-        for (int i = 1; i < words.length; i++) {
-
-            if ((temp.length() + words[i].length()) <= maxWidth) {
-                temp.append(words[i] + " ");
-            } else {
-                // deleting last space
-                temp.deleteCharAt(temp.length() - 1);
-
-                // adding item to result
-                result.add(temp.toString());
-
-                // reseting builder
-                temp.setLength(0);
-
-                // appending current word
-                temp.append(words[i] + " ");
+            while (j < words.length && lineLength + 1 + words[j].length() <= maxWidth) {
+                lineLength += 1 + words[j].length();
+                j++;
             }
 
-        }
-
-        result.add(temp.toString());
-        
-        for(int i=0;i<result.size();i++){
-            String[] parts = result.get(i).split(" ");
-            int wordsCount = parts.length;
-            int totalChars = 0;
-
-            for(String child:parts) totalChars+=child.length();
-
-            int spaces = maxWidth - totalChars;
+            int gaps = j - i - 1;
             StringBuilder sb = new StringBuilder();
 
-            if(wordsCount == 1 || i == result.size()-1){
-                sb.append(String.join(" ", parts));
-            }else{
-
-                int evenSpaces = spaces / 2;
-                int extraSpaces = spaces % 2;
-                
-                for(int j=0;j<parts.length;j++){
-                    sb.append(parts[j]);
-                    if( j < parts.length-1){
-                        int spaceCount = evenSpaces + ( j < extraSpaces ? 1:0);
-                        sb.append(" ".repeat(spaceCount));
-                    }
-                    
+            if (j == words.length || gaps == 0) {  // last line or single word case
+                for (int k = i; k < j; k++) {
+                    sb.append(words[k]);
+                    if (k < j - 1) sb.append(" ");
                 }
-                
-            }
-            result.set(i , sb.toString());
+                int trailingSpaces = maxWidth - sb.length();
+                sb.append(" ".repeat(trailingSpaces));  // pad right side
+            } else {
+                int totalSpaces = maxWidth - (lineLength - gaps);
+                int evenSpaces = totalSpaces / gaps;
+                int extraSpaces = totalSpaces % gaps;
 
+                for (int k = i; k < j - 1; k++) {
+                    sb.append(words[k]);
+                    sb.append(" ".repeat(evenSpaces + (k - i < extraSpaces ? 1 : 0)));
+                }
+                sb.append(words[j - 1]);
+            }
+
+            ans.add(sb.toString());
+            i = j;
         }
 
-        return result;
+        return ans;
     }
 }
