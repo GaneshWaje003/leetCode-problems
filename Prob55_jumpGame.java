@@ -30,4 +30,23 @@ class Solution {
 
         return false;
     }
+
+    boolean canJump(int[] nums){
+
+        int maxReac = 0 , size = nums.length-1;
+        if(size == 0) return true;
+        
+        for(int i=0;i<=size;i++){
+            if(i>maxReac){
+                return false;
+            }
+
+            maxReac = Math.max(maxReac , nums[i]+i);
+
+            if(maxReac >= size) return true;
+        }
+
+        return false;
+    }
+
 }

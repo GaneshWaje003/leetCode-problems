@@ -16,7 +16,7 @@ class Solution {
         while(left < right){
             if(height[left] < height[right]){
                 if(height[left] > leftMax) leftMax = height[left];
-                else result+= leftMax - height[left];
+                else result += leftMax - height[left];
                 left++;
             }else{
                 if(height[right] > rightMax) rightMax = height[right];
@@ -26,5 +26,25 @@ class Solution {
         }
         return result;
         
+    }
+
+    public int traps(int[] height){
+
+        int result = 0;
+        int left = 0 , right = 0 , lefMax = 0 , rightMax  = 0;
+
+        while(left < right){
+            if(height[left] < height[right]){
+                if(height[left] > lefMax) lefMax = height[left];
+                else result += lefMax - height[left];
+                left++;
+            }else{
+                if(height[right] > rightMax) rightMax = height[right];
+                else result += rightMax - height[right];
+                right--;
+            }
+        }
+
+        return result;
     }
 }
