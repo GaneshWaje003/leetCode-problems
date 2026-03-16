@@ -7,50 +7,80 @@ import java.util.Map;
 public class Problem {
     public static void main(String[] args) {
 
-        Solution s = new Solution();
-        System.out.println(s.canConstruct("aa", "ab"));
+        Problem obj = new Problem();
+        int[] arr = { 3, 2, 4 };
 
     }
 
-    public boolean isPrime(int num){
+    public int lengthOfLongestSubstring(String s) {
         
-        // ? for negative numbers & o and 1 
-        if(num <= 1) return false;
+        int max = 0  ;
+        int right = 0  , left = 0 ; 
 
-        for(int i = 2 ; i * i <= num ;i++){
-            if(num % i == 0){
-                return false;
+        HashSet<Character> charSet = new HashSet<>();
+
+        for (right = 0; right < s.length(); right++) {
+            while(charSet.contains(s.charAt(right))){
+                charSet.remove(s.charAt(left));
+                left++;
+            }
+
+            charSet.add(s.charAt(right));
+            max = Math.max(max , right - left + 1);
+        }
+
+
+        return max;
+    }
+
+    public boolean isDuplicatePresent(int[] arr){
+        HashSet<Integer> arrSet = new HashSet<>();
+
+        for(int i :arr){
+            
+            if(arrSet.contains(i)){
+                return true;
+            }
+
+            arrSet.add(i);
+        }
+
+        return false;
+    }
+
+    public char firstUnique(String s){
+        HashMap<Character,Integer> charFreq = new HashMap<>();
+
+        for(char c:s.toCharArray()){
+            charFreq.put(c ,charFreq.getOrDefault(c, 0)+1);
+        }
+
+        for(char c:s.toCharArray()){
+            if(charFreq.get(c) == 1){
+                return c;
             }
         }
 
-        return true;
-
+        return '_';
     }
 
-}
+    public int[] twoSum(int[] arr , int target){
 
+        HashMap<Integer , Integer> IntFreq = new HashMap<>();
 
+        for(int i = 0 ; i <arr.length ;i++){
 
+            int comp = target - arr[i];
 
+            if(IntFreq.containsKey(comp)){
+                return new int[]{IntFreq.get(comp) , i};
+            }
 
-
-
-
-
-class Solution {
-    public boolean canConstruct(String ransomNote, String magazine) {
-        Map<Character , Integer> seen = new HashMap<>();
-        for(char c : magazine.toCharArray()){
-            seen.put( c , seen.getOrDefault(c, 0) + 1);
+            IntFreq.put(arr[i] , i);
         }
 
-        // check and consume ransomnote
-        for(char c :ransomNote.toCharArray()){
-            int count = seen.getOrDefault(c, 0);
-            if(count == 0) return false;
-            seen.put(c , count -1 );
-        }
-
-        return true;
+        return new int[]{};
     }
+
+    // public int[] intersection()
 }
